@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrelpication
+  namespace: default
+spec:
+  replicas: 5
+  selector:
+    app: javapodapp #  for pod not mandatory
+  template: # POD TEMPLATE
+    metadata:
+      name: mypodreplication #pod name
+      labels:
+       app: javapodapp
+    spec:
+      containers:
+      - name: mypodreprication
+        image: wordpress
+        ports:
+        - containerPort: 80
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: mysrvreplication
+spec:
+ type: LoadBalancer
+ selector:
+  app: javapodapp
+ ports:
+ - port: 50
+   targetPort: 80
+   nodePort:

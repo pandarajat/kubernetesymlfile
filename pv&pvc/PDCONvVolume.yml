@@ -1,0 +1,16 @@
+
+#host-path
+        volumeMOunts:    # for container
+        - name: mongodbvol      # containerVolumeName and podVolumeNAme are same alway
+          mountPath: /daa/dbt
+      volumes:     # for pod
+      - name: mongodbvol
+        hostPath:
+          path: /mongo 
+
+# nfs mount
+      volumes:
+      - name: mongodbvol
+        nfs:
+          server: 172.31.41.79
+          path: /mnt/nfs_share     
