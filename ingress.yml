@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-resource
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - host: "34.93.105.40.nip.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: mydeployservice
+            port:
+              number: 80
+      - pathType: Prefix        
+        path: /hello
+        backend:
+          service:
+            name: web
+            port:
+              number: 8080  
